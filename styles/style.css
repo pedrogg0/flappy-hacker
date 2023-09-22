@@ -1,0 +1,45 @@
+#background{
+    display: block;
+}
+
+#character{
+    position: relative;
+    margin-top: 300px;
+    margin-left: 200px;
+}
+
+#gameArea{
+    display: block;
+    margin: auto;
+    margin-top: 15%;
+    height: 400px;
+    width: 800px;
+}
+
+#element{
+    display: block;
+    margin: auto;
+    margin-top: 15%;
+    height: 400px;
+    width: 800px;
+}
+
+
+img{
+    visibility: hidden;
+}
+
+
+h1{
+    text-align: center;
+}
+
+@media (max-width: 800px)  {
+    #background{
+        display: block;
+        margin: auto;
+        scale: 50%;
+        margin-top: 10%;
+    }
+}
+
