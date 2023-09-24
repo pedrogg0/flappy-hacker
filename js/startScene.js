@@ -1,7 +1,9 @@
+import GameScene from "./gameScene.js";
+
 class StartScene extends Phaser.Scene {
 
     constructor() {
-        super({ Key: "StartScene" });
+        super("StartScene");
     }
 
 
@@ -33,7 +35,7 @@ class StartScene extends Phaser.Scene {
         this.character.play("idle", true);
         //Checking if space key is down for launching game scene
         if (this.space.isDown) {
-            console.log("you pressed space");
+            this.scene.start("GameScene");
         }
 
     }
