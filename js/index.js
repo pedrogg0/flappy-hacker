@@ -2,8 +2,8 @@ import StartScene from "./startScene.js";
 //Main game file
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 300,
+    width: 600,
+    height: 250,
     backgroundColor: '#351f1b',
     parent: 'Flappy Hacker',
     physics: {
