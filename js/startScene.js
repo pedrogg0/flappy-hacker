@@ -19,7 +19,7 @@ class StartScene extends Phaser.Scene {
         //Animation for the character
         this.anims.create({
             key: "idle",
-            frameRate: 7,
+            frameRate: 8,
             frames: this.anims.generateFrameNumbers("idle", { start: 0, end: 10}),
         });
         //Physics for the character
