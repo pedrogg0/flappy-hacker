@@ -20,18 +20,21 @@ class StartScene extends Phaser.Scene {
             frameRate: 7,
             frames: this.anims.generateFrameNumbers("idle", { start: 0, end: 10}),
         });
-
+        //Physics for the character
         this.character = this.physics.add.sprite(250, 220, "idle");
         this.character.setScale(1.5);
+        //Space text and space input handler
         this.add.text(125, 125, 'Press space to start', { font: '40px Arial' });
-        this.input.keyboard.on('keydown-ENTER', function (event) {
-            console.log("hola");
-        });
-
+        this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        
     }
-
+    
     update(){
         this.character.play("idle", true);
+        //Checking if space key is down for launching game scene
+        if (this.space.isDown) {
+            console.log("you pressed space");
+        }
 
     }
 
