@@ -76,12 +76,14 @@ function update ()
     cursors = this.input.keyboard.createCursorKeys();
 
     if (cursors.up.isDown && player.body.checkWorldBounds()) {
-        player.setVelocityY(-330);
-    }
-    if(!player.body.checkWorldBounds()){
-        player.anims.play('jump', true);
+        jump();
     }
     else{
         player.anims.play("run", true);
     }
+}
+
+function jump(){
+    player.setVelocityY(-330);
+    player.anims.play('jump', true);
 }
