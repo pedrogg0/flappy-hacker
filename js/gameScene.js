@@ -9,8 +9,8 @@ class GameScene extends Phaser.Scene {
         this.load.image('background', 'assets/foreground.png');
         this.load.spritesheet("run", "assets/run.png", { frameWidth: 48, frameHeight: 48 });
         this.load.spritesheet("jump", "assets/jump.png", { frameWidth: 48, frameHeight: 48 });
-        this.load.spritesheet("wall1", "assets/wall1.png", { frameWidth: 50, frameHeight: 50 });
-        this.load.spritesheet("wall2", "assets/wall2.png", { frameWidth: 50, frameHeight: 50 });
+        this.load.spritesheet("wall1", "assets/wall1.png", { frameWidth: 45, frameHeight: 30 });
+        this.load.spritesheet("wall2", "assets/wall2.png", { frameWidth: 49, frameHeight: 34 });
 
     }
 
@@ -20,12 +20,14 @@ class GameScene extends Phaser.Scene {
         this.image.setOrigin(0,0);
 
         //Keyboard handler
-        this.cursors = this.input.keyboard.createCursorKeys();
+        this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         //Props creation
-        this.wall = this.add.sprite(700,220, "wall1");
+        this.wall = this.physics.add.sprite(700,220, "wall1");
+        this.wall.body.setAllowGravity(false);
         this.wall.inputEnabled = true;
-
+        this.wall.setSize(4,4);
+        
         //Animation for the character
         this.anims.create({
             key: "run",
@@ -58,19 +60,24 @@ class GameScene extends Phaser.Scene {
             this.character.play("run", true);   // Play the run animation if on the ground
         }
         
-        if(this.cursors.up.isDown && this.character.body.onFloor()){
+        if(this.space.isDown && this.character.body.onFloor()){
             this.character.setVelocityY(-310);
         }
         //Walls movement
-        this.wall.x -= 5; //Walls speed (difficulty)
+        this.wall.x -= 6; //Walls speed (difficulty)
         if(this.wall.x < 0){
-            this.wall.destroy();
-            this.wall = this.add.sprite(600,220, "wall" + Math.floor(Math.random() * 2 + 1));
+            this.spawnWall();
         }
+        this.physics.add.collider(this.wall, this.character, function(){
+            console.log("collision");
+        });
+    }
 
-        if(this.wall.onInputOver != null){
-            console.log("touch wall");
-        }
+    spawnWall(){
+        this.wall.destroy();
+        this.wall = this.physics.add.sprite(600,220, "wall" + Math.floor(Math.random() * 2 + 1));
+        this.wall.body.setAllowGravity(false);
+        this.wall.setSize(4,4);
     }
 
 }
