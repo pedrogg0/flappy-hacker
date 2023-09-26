@@ -49,37 +49,59 @@ class GameScene extends Phaser.Scene {
         this.character.setGravityY(300);
         this.character.setCollideWorldBounds(true);
         this.character.setScale(1.5);
+
+        //score
+        this.score = 0;
         
     }
     
     update(){
+        this.playAnimations();
+        this.manageJump();
+        this.wallsMovement();
+        this.checkCollision();
+    }
+
+    
+    //play animations depending on character situation
+    playAnimations() {
         var onAir = !this.character.body.onFloor(); // Check if the character is in the air
         if (onAir) {
             this.character.play("jump", true);  // Play the jump animation if in the air
         } else {
             this.character.play("run", true);   // Play the run animation if on the ground
         }
-        
-        if(this.space.isDown && this.character.body.onFloor()){
+    }
+    
+    //Jump when spacebar is pressed
+    manageJump() {
+        if (this.space.isDown && this.character.body.onFloor()) {
             this.character.setVelocityY(-310);
         }
-        //Walls movement
+        
+    }
+    
+    wallsMovement() {
         this.wall.x -= 6; //Walls speed (difficulty)
-        if(this.wall.x < 0){
-            this.spawnWall();
+        if (this.wall.x < 0) {
+            this.spawnWall(); //Spawn new wall when current wall exit scene
         }
+    }
+    
+    //Spawn wall when the last wall exit the scene
+    spawnWall(){
+        this.wall.destroy(); //Destroy previous wall object
+        this.wall = this.physics.add.sprite(600,220, "wall" + Math.floor(Math.random() * 2 + 1)); //Choose randomly between wall assets
+        this.wall.body.setAllowGravity(false);
+        this.wall.setSize(4,4);
+        this.score += 5; //Increase score every time a wall does spawn
+    }
+
+    checkCollision(){
         this.physics.add.collider(this.wall, this.character, function(){
             console.log("collision");
         });
     }
-
-    spawnWall(){
-        this.wall.destroy();
-        this.wall = this.physics.add.sprite(600,220, "wall" + Math.floor(Math.random() * 2 + 1));
-        this.wall.body.setAllowGravity(false);
-        this.wall.setSize(4,4);
-    }
-
 }
 
 
