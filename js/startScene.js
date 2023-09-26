@@ -34,7 +34,7 @@ class StartScene extends Phaser.Scene {
     update(){
         this.character.play("idle", true);
         //Checking if space key is down for launching game scene
-        if (this.space.isDown) {
+        if (Phaser.Input.Keyboard.JustDown(this.space)) {
             this.scene.start("GameScene");
         }
 

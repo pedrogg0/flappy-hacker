@@ -1,5 +1,6 @@
 import StartScene from "./startScene.js";
 import GameScene from "./gameScene.js";
+import EndGameScene from "./endGameScene.js";
 //Main game file
 const config = {
     type: Phaser.AUTO,
@@ -12,7 +13,7 @@ const config = {
     },
     //canvasStyle: `display: block; width: 100%; height: 100%;`,
     autoFocus: true,
-    scene: [StartScene, GameScene],
+    scene: [StartScene, GameScene, EndGameScene],
 };
 
 let game = new Phaser.Game(config);
