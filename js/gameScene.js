@@ -49,9 +49,10 @@ class GameScene extends Phaser.Scene {
         this.character.setGravityY(300);
         this.character.setCollideWorldBounds(true);
         this.character.setScale(1.5);
-
+        
         //score
         this.score = 0;
+        this.scoreText = this.add.text(0, 0, 'Score: 0', { font: '40px Arial' });
         
     }
     
@@ -95,6 +96,7 @@ class GameScene extends Phaser.Scene {
         this.wall.body.setAllowGravity(false);
         this.wall.setSize(4,4);
         this.score += 5; //Increase score every time a wall does spawn
+        this.scoreText.setText("Score: " + this.score);
     }
 
     checkCollision(){
