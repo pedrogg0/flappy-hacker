@@ -11,7 +11,7 @@ const config = {
     physics: {
         default: 'arcade'
     },
-    //canvasStyle: `display: block; width: 100%; height: 100%;`,
+    canvasStyle: `display: block; width: 80%; height: 80%;`,
     autoFocus: true,
     scene: [StartScene, GameScene, EndGameScene],
 };

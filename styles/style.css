@@ -1,1 +1,19 @@
+canvas {
+    display: block;
+    margin: auto;
+    margin-bottom: 5%;
+}
 
+p {
+    display: block;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    margin-left: 10%;
+}
