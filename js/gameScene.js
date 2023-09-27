@@ -86,7 +86,7 @@ class GameScene extends Phaser.Scene {
     }
     
     wallsMovement() {
-        this.wall.x -= 4; //Walls speed (difficulty)
+        this.wall.x -= this.getDifficulty(); //Walls speed (difficulty)
         if (this.wall.x < 0) {
             this.spawnWall(); //Spawn new wall when current wall exit scene
         }
@@ -104,6 +104,18 @@ class GameScene extends Phaser.Scene {
 
     checkCollision(){
         this.physics.add.collider(this.wall, this.character, collision.bind(this));
+    }
+
+    getDifficulty(){
+        if(this.score < 20){
+            return 2;
+        }
+        else if(this.score < 50){
+            return 3;
+        }
+        else{
+            return 4;
+        }
     }
     
 }
