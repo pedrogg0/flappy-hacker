@@ -1,3 +1,4 @@
+import EndGameScene from "./endGameScene.js";
 class GameScene extends Phaser.Scene {
 
     constructor() {
@@ -41,6 +42,8 @@ class GameScene extends Phaser.Scene {
         });
 
         //Physics
+        //World framerate
+        this.physics.world.setFPS(60);
         //World Gravity
         this.physics.world.gravity.y = 400;
 
@@ -83,7 +86,7 @@ class GameScene extends Phaser.Scene {
     }
     
     wallsMovement() {
-        this.wall.x -= 6; //Walls speed (difficulty)
+        this.wall.x -= 4; //Walls speed (difficulty)
         if (this.wall.x < 0) {
             this.spawnWall(); //Spawn new wall when current wall exit scene
         }
@@ -100,10 +103,14 @@ class GameScene extends Phaser.Scene {
     }
 
     checkCollision(){
-        this.physics.add.collider(this.wall, this.character, function(){
-            console.log("collision");
-        });
+        this.physics.add.collider(this.wall, this.character, collision.bind(this));
     }
+    
+}
+
+function collision(){
+    this.wall.destroy();
+    this.scene.start("EndGameScene");
 }
 
 
