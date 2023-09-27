@@ -42,6 +42,8 @@ class GameScene extends Phaser.Scene {
         });
 
         //Physics
+        //World framerate
+        this.physics.world.setFPS(60);
         //World Gravity
         this.physics.world.gravity.y = 400;
 
@@ -84,7 +86,7 @@ class GameScene extends Phaser.Scene {
     }
     
     wallsMovement() {
-        this.wall.x -= 6; //Walls speed (difficulty)
+        this.wall.x -= 4; //Walls speed (difficulty)
         if (this.wall.x < 0) {
             this.spawnWall(); //Spawn new wall when current wall exit scene
         }
