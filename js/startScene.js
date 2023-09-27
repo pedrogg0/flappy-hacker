@@ -22,6 +22,9 @@ class StartScene extends Phaser.Scene {
             frameRate: 8,
             frames: this.anims.generateFrameNumbers("idle", { start: 0, end: 10}),
         });
+        //Physics
+        //World framerate
+        this.physics.world.setFPS(60);
         //Physics for the character
         this.character = this.physics.add.sprite(250, 220, "idle");
         this.character.setScale(1.5);
