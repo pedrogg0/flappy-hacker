@@ -59,10 +59,10 @@ class GameScene extends Phaser.Scene {
         
     }
     
-    update(){
+    update(time, delta){
         this.playAnimations();
         this.manageJump();
-        this.wallsMovement();
+        this.wallsMovement(delta);
         this.checkCollision();
     }
 
@@ -85,8 +85,8 @@ class GameScene extends Phaser.Scene {
         
     }
     
-    wallsMovement() {
-        this.wall.x -= this.getDifficulty(); //Walls speed (difficulty)
+    wallsMovement(delta) {
+        this.wall.x -= this.getDifficulty() * delta/10; //Walls speed (difficulty)
         if (this.wall.x < 0) {
             this.spawnWall(); //Spawn new wall when current wall exit scene
         }
@@ -108,13 +108,13 @@ class GameScene extends Phaser.Scene {
 
     getDifficulty(){
         if(this.score < 20){
-            return 2;
-        }
-        else if(this.score < 50){
             return 3;
         }
-        else{
+        else if(this.score < 50){
             return 4;
+        }
+        else{
+            return 5;
         }
     }
     
