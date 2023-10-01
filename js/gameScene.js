@@ -55,7 +55,7 @@ class GameScene extends Phaser.Scene {
         
         //score
         this.score = 0;
-        this.scoreText = this.add.text(0, 0, 'Score: 0', { font: '40px Arial' });
+        this.scoreText = this.add.text(0, 0, 'Score: 0', { fontFamily: 'Handjet', fontSize: '40px', color: '#a80874'});
         
     }
     
@@ -86,7 +86,7 @@ class GameScene extends Phaser.Scene {
     }
     
     wallsMovement(delta) {
-        this.wall.x -= this.getDifficulty() * delta/10; //Walls speed (difficulty)
+        this.wall.x -= this.getDifficulty() * delta/10; //Walls speed (difficulty) Using delta for make the speed the same in every monitor not depending on refresh rate
         if (this.wall.x < 0) {
             this.spawnWall(); //Spawn new wall when current wall exit scene
         }

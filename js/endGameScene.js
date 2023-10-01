@@ -30,7 +30,7 @@ class EndGameScene extends Phaser.Scene {
         this.character.setScale(1.5);
 
         //Space text and space input handler
-        this.add.text(200, 100, 'Game Over', { font: '40px Arial' });
+        this.add.text(200, 100, 'Game Over', { fontSize: '60px', fontFamily: 'Handjet', color: '#a80874' });
         this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     
     }
