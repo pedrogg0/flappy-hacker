@@ -55,7 +55,8 @@ class GameScene extends Phaser.Scene {
         
         //score
         this.score = 0;
-        this.scoreText = this.add.text(0, 0, 'Score: 0', { fontFamily: 'Audiowide', fontSize: '40px', color: '#CCFF00'});
+        this.registry.set('score', this.score); //Save score in registry for use it later on endGameScene
+        this.scoreText = this.add.text(10, 0, 'Score: 0', { fontFamily: 'Audiowide', fontSize: '30px', color: '#CCFF00'});
         
     }
     
@@ -100,6 +101,7 @@ class GameScene extends Phaser.Scene {
         this.wall.setSize(4,4);
         this.score += 5; //Increase score every time a wall does spawn
         this.scoreText.setText("Score: " + this.score);
+        this.registry.set('score', this.score); //Save score in registry for use it later on endGameScene
     }
 
     checkCollision(){

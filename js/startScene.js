@@ -30,6 +30,10 @@ class StartScene extends Phaser.Scene {
         //Space text and space input handler
         this.startText = this.add.text(80, 100, 'Press space to start', { fontSize: '40px', fontFamily: 'Audiowide', color: '#CCFF00' });
         this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+        //Saving on registry highScore
+        this.highScore = 0;
+        this.registry.set('highScore', this.highScore);
         
     }
     
