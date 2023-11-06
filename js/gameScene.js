@@ -55,7 +55,7 @@ class GameScene extends Phaser.Scene {
         
         //score
         this.score = 0;
-        this.scoreText = this.add.text(0, 0, 'Score: 0', { fontFamily: 'Handjet', fontSize: '40px', color: '#a80874'});
+        this.scoreText = this.add.text(0, 0, 'Score: 0', { fontFamily: 'Audiowide', fontSize: '40px', color: '#CCFF00'});
         
     }
     

@@ -10,6 +10,7 @@ class StartScene extends Phaser.Scene {
     preload() {
         this.load.image('background', 'assets/foreground.png');
         this.load.spritesheet("idle", "assets/idle.png", { frameWidth: 48, frameHeight: 48 });
+
     }
 
     create() {
@@ -27,8 +28,7 @@ class StartScene extends Phaser.Scene {
         this.character = this.physics.add.sprite(250, 220, "idle");
         this.character.setScale(1.5);
         //Space text and space input handler
-        this.startText = this.add.text(100, 100, 'Press space to start', { fontSize: '60px', fontFamily: 'Handjet', color: '#a80874' });
-        this.startText.setBackgroundColor('rgba(255, 255, 255, 0.5)');
+        this.startText = this.add.text(80, 100, 'Press space to start', { fontSize: '40px', fontFamily: 'Audiowide', color: '#CCFF00' });
         this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         
     }
