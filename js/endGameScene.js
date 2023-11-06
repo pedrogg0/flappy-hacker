@@ -35,15 +35,31 @@ class EndGameScene extends Phaser.Scene {
         
         //Last score display
         this.lastScore = this.registry.get('score');
-        this.scoreText = this.add.text(350, 0, 'Last Score: ' + this.lastScore, { fontFamily: 'Audiowide', fontSize: '30px', color: '#CCFF00'});
+        if(this.lastScore < 10){ //For the purpose of correct spacing of the text from the border of the canvas
+            this.scoreText = this.add.text(350, 0, 'Last Score: ' + this.lastScore, { fontFamily: 'Audiowide', fontSize: '30px', color: '#CCFF00'});
+        }
+        else{
+            this.scoreText = this.add.text(345, 0, 'Last Score: ' + this.lastScore, { fontFamily: 'Audiowide', fontSize: '30px', color: '#CCFF00'});
+        }
 
         //Highscore comparison and text display
         this.highScore = this.registry.get("highScore");
         if(this.highScore < this.lastScore){
             this.highScore = this.lastScore;
             this.registry.set("highScore", this.highScore);
+            this.highScoreText = this.add.text(10, 0, 'New Record!!', { fontFamily: 'Audiowide', fontSize: '30px', color: '#CCFF00'});
+            this.time.addEvent({ //Time event for animate new record text display
+                delay: 1000,                
+                callback: () => {           
+                    this.highScoreText.setText('High score: ' + this.highScore);
+                },
+                callbackScope: this,        
+                loop: false                 
+            });
         }
-        this.scoreText = this.add.text(10, 0, 'High score: ' + this.highScore, { fontFamily: 'Audiowide', fontSize: '30px', color: '#CCFF00'});
+        else{
+            this.scoreText = this.add.text(10, 0, 'High score: ' + this.highScore, { fontFamily: 'Audiowide', fontSize: '30px', color: '#CCFF00'});
+        }
     }
     
     update() {
