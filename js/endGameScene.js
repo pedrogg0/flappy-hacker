@@ -16,7 +16,7 @@ class EndGameScene extends Phaser.Scene {
     create() {
         this.image = this.add.image(0, 0, 'background');
         this.image.setOrigin(0, 0);
-
+        
         //Animation for the character
         this.played = false;
         this.anims.create({
@@ -24,15 +24,26 @@ class EndGameScene extends Phaser.Scene {
             frameRate: 8,
             frames: this.anims.generateFrameNumbers("death", { start: 0, end: 10 }),
         });
-
+        
         //character creation
         this.character = this.add.sprite(250, 220, "death");
         this.character.setScale(1.5);
-
+        
         //Space text and space input handler
         this.add.text(120, 100, 'Game Over', { fontSize: '60px', fontFamily: 'Audiowide', color: '#CCFF00' });
         this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-    
+        
+        //Last score display
+        this.lastScore = this.registry.get('score');
+        this.scoreText = this.add.text(350, 0, 'Last Score: ' + this.lastScore, { fontFamily: 'Audiowide', fontSize: '30px', color: '#CCFF00'});
+
+        //Highscore comparison and text display
+        this.highScore = this.registry.get("highScore");
+        if(this.highScore < this.lastScore){
+            this.highScore = this.lastScore;
+            this.registry.set("highScore", this.highScore);
+        }
+        this.scoreText = this.add.text(10, 0, 'High score: ' + this.highScore, { fontFamily: 'Audiowide', fontSize: '30px', color: '#CCFF00'});
     }
     
     update() {
