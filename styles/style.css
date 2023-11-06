@@ -4,6 +4,12 @@ canvas {
     margin-bottom: 5%;
 }
 
+body{
+    font-family: 'Audiowide', sans-serif; 
+    background-color: #120a1d;
+    color: #CCFF00;
+}
+
 p {
     display: block;
     margin-left: 10%;
@@ -12,8 +18,10 @@ p {
 
 h1 {
     text-align: center;
+    font-size: 50px;
 }
 
 h2 {
     margin-left: 10%;
+    font-size: 34px;
 }
