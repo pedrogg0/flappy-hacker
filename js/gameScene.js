@@ -86,6 +86,7 @@ class GameScene extends Phaser.Scene {
             this.character.setVelocityY(-310);
             this.sound.play('jumpSound');
         }
+
         
     }
     
@@ -99,12 +100,31 @@ class GameScene extends Phaser.Scene {
     //Spawn wall when the last wall exit the scene
     spawnWall(){
         this.wall.destroy(); //Destroy previous wall object
-        this.wall = this.physics.add.sprite(600,220, "wall" + Math.floor(Math.random() * 2 + 1)); //Choose randomly between wall assets
-        this.wall.body.setAllowGravity(false);
-        this.wall.setSize(4,4);
-        this.score += 5; //Increase score every time a wall does spawn
-        this.scoreText.setText("Score: " + this.score);
-        this.registry.set('score', this.score); //Save score in registry for use it later on endGameScene
+        if(this.score < 90){
+            this.wall = this.physics.add.sprite(600,220, "wall" + Math.floor(Math.random() * 2 + 1)); //Choose randomly between wall assets
+            this.wall.body.setAllowGravity(false);
+            this.wall.setSize(4,4);
+            this.score += 5; //Increase score every time a wall does spawn
+            this.scoreText.setText("Score: " + this.score);
+            this.registry.set('score', this.score); //Save score in registry for use it later on endGameScene
+        }
+        else{
+            if(!this.wallEvent || this.wallEvent.getProgress() === 1){ //Randomize time between new walls after score is higher of 90 to increase difficulty
+                this.wallEvent = this.time.addEvent({ //Time event for animate new record text display
+                    delay: Phaser.Math.Between(0, 1500),                
+                    callback: () => {           
+                        this.wall = this.physics.add.sprite(600,220, "wall" + Math.floor(Math.random() * 2 + 1)); //Choose randomly between wall assets
+                        this.wall.body.setAllowGravity(false);
+                        this.wall.setSize(4,4);
+                        this.score += 5; //Increase score every time a wall does spawn
+                        this.scoreText.setText("Score: " + this.score);
+                        this.registry.set('score', this.score); //Save score in registry for use it later on endGameScene
+                    },
+                    callbackScope: this,        
+                    loop: false                 
+                });
+            }
+        }
     }
 
     checkCollision(){
@@ -115,12 +135,19 @@ class GameScene extends Phaser.Scene {
         if(this.score < 20){
             return 3;
         }
-        else if(this.score < 50){
+        else if(this.score < 40){
             return 4;
         }
-        else{
+        else if(this.score < 60){
             return 5;
         }
+        else if(this.score < 90){
+            return 6;
+        }
+        else{
+            return 7
+        }
+
     }
     
 }
