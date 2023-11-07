@@ -12,6 +12,8 @@ class GameScene extends Phaser.Scene {
         this.load.spritesheet("jump", "assets/jump.png", { frameWidth: 48, frameHeight: 48 });
         this.load.spritesheet("wall1", "assets/wall1.png", { frameWidth: 45, frameHeight: 30 });
         this.load.spritesheet("wall2", "assets/wall2.png", { frameWidth: 49, frameHeight: 34 });
+        this.load.audio('jumpSound', 'assets/jump.mp3');
+        this.load.audio('wallCrash', 'assets/death.mp3');
 
     }
 
@@ -82,6 +84,7 @@ class GameScene extends Phaser.Scene {
     manageJump() {
         if (this.space.isDown && this.character.body.onFloor()) {
             this.character.setVelocityY(-310);
+            this.sound.play('jumpSound');
         }
         
     }
@@ -123,6 +126,7 @@ class GameScene extends Phaser.Scene {
 }
 
 function collision(){
+    this.sound.play('wallCrash');
     this.wall.destroy();
     this.scene.start("EndGameScene");
 }
