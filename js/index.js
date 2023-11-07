@@ -17,7 +17,7 @@ function startGame(){
         type: Phaser.AUTO,
         width: 600,
         height: 250,
-        backgroundColor: '#351f1b',
+        backgroundColor: '#120a1d', //#351f1b
         parent: 'Flappy Hacker',
         physics: {
             default: 'arcade'
